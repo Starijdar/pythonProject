@@ -11,10 +11,7 @@ gradesm[2] = sum(grades[2]) / len(grades[2])
 gradesm[3] = sum(grades[3]) / len(grades[3])
 gradesm[4] = sum(grades[4]) / len(grades[4])
 
-
-
 studentsl.sort()
-print(studentsl)
 
 dict_ = dict(zip(studentsl, gradesm))
 print(dict_)

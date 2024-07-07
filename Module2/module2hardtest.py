@@ -10,6 +10,8 @@ def motocikl(result, i, k, n):
                     result.append(f'{i}{k}')
     return result
 
+print()
+print()
 
 result = []
 i = 0
