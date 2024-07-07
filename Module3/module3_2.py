@@ -4,6 +4,10 @@ def send_email(message, recipient, *, sender="university.help@gmail.com"):
         if i == "@":
             count += 1
 
+    for i in sender:
+        if i == "@":
+            count += 1
+
     if ".com" in recipient or ".ru" in recipient or ".net" in recipient:
         count += 1
 
@@ -14,7 +18,7 @@ def send_email(message, recipient, *, sender="university.help@gmail.com"):
         print("Нелзья отправлять сообщение самому себе")
         return
 
-    if count >= 3:
+    if count >= 4:
         if sender == "university.help@gmail.com":
             print(f'Письмо успешно отправлено с адреса {sender} на адрес {recipient}')
         else:
