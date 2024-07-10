@@ -1,12 +1,10 @@
 def send_email(message, recipient, *, sender="university.help@gmail.com"):
     count = 0
-    for i in recipient:
-        if i == "@":
-            count += 1
+    if "@" in sender:
+        count += 1
 
-    for i in sender:
-        if i == "@":
-            count += 1
+    if "@" in recipient:
+        count += 1
 
     if ".com" in recipient or ".ru" in recipient or ".net" in recipient:
         count += 1
