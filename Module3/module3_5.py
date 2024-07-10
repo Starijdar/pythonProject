@@ -15,5 +15,5 @@ def get_multiplied_digits(numbers):
 
 
 
-
-print(get_multiplied_digits(3144))
+result = get_multiplied_digits(40203)
+print(result)
