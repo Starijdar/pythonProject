@@ -8,16 +8,25 @@ class UrTube:
     def log_in(self, nickname, password):
         if nickname in UrTube.users:
             if hash(password) in User.users[nickname]:
-                current_user = nickname
+                if UrTube.current_user == None:
+                    print(f'Добро пожаловать {nickname}')
+                    UrTube.current_user = nickname
+                else:
+                    UrTube.log_out(self)
+                    print(f'Добро пожаловать {nickname}')
+                    UrTube.current_user = nickname
+            else:
+                print("Пароль неверный")
 
     def register(self, nickname, password, age):
         if nickname in UrTube.users:
             print(f'Пользователь {nickname} уже существует')
         else:
             UrTube.users.append(nickname)
-            User.users[nickname] = password, age
+            User(nickname, password, age)
             UrTube.current_user = nickname
     def log_out(self):
+        print(f'До встречи {UrTube.current_user}')
         current_user = None
 
     def add(self, *args):
@@ -42,7 +51,7 @@ class UrTube:
                     print('Вам нет 18 лет, пожалуйста покиньте страницу')
                 else:
                     for Video.time_now in range(1, Video.videos[title][0] + 1):
-                        time.sleep(1)
+                        # time.sleep(1)
                         print(Video.time_now, end=' ')
                     print('Конец видео')
                     Video.time_now = 0
@@ -80,8 +89,7 @@ class User:
     users = {}
 
     def __init__(self, nickname, password, age):
-        self.users[nickname][password] = hash(password)
-        self.users[nickname][age] = age
+        self.users[nickname] = hash(password), age
 
 
 ur = UrTube()
@@ -108,3 +116,6 @@ print(ur.current_user)
 
 # Попытка воспроизведения несуществующего видео
 ur.watch_video('Лучший язык программирования 2024 года!')
+
+
+ur.log_in('vasya_pupkin', 'lolkekcheburek')
