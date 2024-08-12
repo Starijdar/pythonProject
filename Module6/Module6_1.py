@@ -1,7 +1,6 @@
 class Animal:
     alive = True
     fed = False
-    name = None
 
     def __init__(self, name):
         self.name = name
