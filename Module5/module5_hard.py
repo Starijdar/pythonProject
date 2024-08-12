@@ -91,6 +91,12 @@ class User:
         self.password = UrTube.users[self.nickname][0]
         self.age = UrTube.users[self.nickname][1]
 
+    def __str__(self):
+        return f"Пользователь: {self.nickname}, возраст: {self.age}"
+
+    def __repr__(self):
+        return f"User(nickname='{self.nickname}', age={self.age})"
+
 
 ur = UrTube()
 v1 = Video('Лучший язык программирования 2024 года', 200)
@@ -120,6 +126,7 @@ ur.watch_video('Лучший язык программирования 2024 го
 
 
 ur.log_in('vasya_pupkin', 'lolkekcheburek')
+
+
 us = User()
-print(us.password)
-input()
+print(us)
