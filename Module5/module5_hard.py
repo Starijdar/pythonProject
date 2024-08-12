@@ -1,13 +1,13 @@
 import time
 
 class UrTube:
-    users = []
+    users = {}
     videos = []
     current_user = None
 
     def log_in(self, nickname, password):
         if nickname in UrTube.users:
-            if hash(password) in User.users[nickname]:
+            if hash(password) in UrTube.users[nickname]:
                 if UrTube.current_user == None:
                     print(f'Добро пожаловать {nickname}')
                     UrTube.current_user = nickname
@@ -18,12 +18,11 @@ class UrTube:
             else:
                 print("Пароль неверный")
 
-    def register(self, nickname, password, age):
+    def register(self, nickname, password, age, *args):
         if nickname in UrTube.users:
             print(f'Пользователь {nickname} уже существует')
         else:
-            UrTube.users.append(nickname)
-            User(nickname, password, age)
+            UrTube.users[nickname] = hash(password), age
             UrTube.current_user = nickname
     def log_out(self):
         print(f'До встречи {UrTube.current_user}')
@@ -47,7 +46,7 @@ class UrTube:
             print('Войдите в аккаунт, чтобы смотреть видео')
         elif title in UrTube.videos:
             if True in Video.videos[title]:
-                if User.users[self.current_user][1] < 18:
+                if UrTube.users[self.current_user][1] < 18:
                     print('Вам нет 18 лет, пожалуйста покиньте страницу')
                 else:
                     for Video.time_now in range(1, Video.videos[title][0] + 1):
@@ -86,10 +85,11 @@ class Video:
 
 
 class User:
-    users = {}
 
-    def __init__(self, nickname, password, age):
-        self.users[nickname] = hash(password), age
+    def __init__(self, *args):
+        self.nickname = UrTube.current_user
+        self.password = UrTube.users[self.nickname][0]
+        self.age = UrTube.users[self.nickname][1]
 
 
 ur = UrTube()
@@ -98,6 +98,7 @@ v2 = Video('Для чего девушкам парень программист
 
 # Добавление видео
 ur.add(v1, v2)
+
 
 # Проверка поиска
 print(ur.get_videos('лучший'))
@@ -119,3 +120,6 @@ ur.watch_video('Лучший язык программирования 2024 го
 
 
 ur.log_in('vasya_pupkin', 'lolkekcheburek')
+us = User()
+print(us.password)
+input()
