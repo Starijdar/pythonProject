@@ -17,18 +17,21 @@ class Iterator:
         return self
 
     def __next__(self):
-        a = self.pointer
-        self.pointer += self.step
+
         if self.step > 0:
             if self.start > self.stop:
                 raise StepValueError
             else:
+                a = self.pointer
+                self.pointer += self.step
                 while a <= self.stop:
                     return a
         elif self.step < 0:
             if self.start < self.stop:
                 raise StepValueError
             else:
+                a = self.pointer
+                self.pointer += self.step
                 while a >= self.stop:
                     return a
         raise StopIteration
