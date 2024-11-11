@@ -42,18 +42,19 @@ class Cafe:
                 print(f'{g.name} в очереди')
 
     def discuss_guests(self):
-        while not q.empty():
+        while True:
             for t in self.tables:
                 if t.guest is None and not q.empty():
                     t.guest = q.get()
                     print(f'{t.guest.name} вышел(-ла) из очереди и сел(-а) за стол номер {t.number}')
                     t.guest.start()
-                elif t.guest is not None and t.guest.is_alive():
-                    continue
-                else:
+                elif t.guest is None:
+                    break
+                elif not t.guest.is_alive() and t.guest is not None:
                     print(f'{t.guest.name} покушал(-а) и ушёл(ушла)')
                     t.guest = None
                     print(f'Стол номер {t.number} свободен')
+
 
 # Создание столов
 tables = [Table(number) for number in range(1, 6)]
