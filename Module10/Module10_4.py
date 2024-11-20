@@ -42,7 +42,7 @@ class Cafe:
                 print(f'{g.name} в очереди')
 
     def discuss_guests(self):
-        while not q.empty() or any(table is not None for table.guest in self.tables):
+        while not q.empty() or any(table.guest is not None for table in self.tables):
             for t in self.tables:
                 if t.guest is None and not q.empty():
                     t.guest = q.get()
