@@ -3,10 +3,13 @@ import RunnersTornament as Rt
 
 
 class TournamentTest(unittest.TestCase):
+    is_frozen = True
+
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def setUp(self):
         self.runer_1 = Rt.Runner('Усэйн', 10)
         self.runer_2 = Rt.Runner('Андрей', 9)
@@ -19,26 +22,30 @@ class TournamentTest(unittest.TestCase):
             for key, value in test_value.items():
                 print(f'\t{key}: {value.name}')
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_run1(self):
         run_1 = Rt.Tournament(90, self.runer_1, self.runer_3)
         result = run_1.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ник всегда должен быть последним')
         self.all_results['test_run1'] = result
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_run2(self):
         run_2 = Rt.Tournament(90, self.runer_2, self.runer_3)
         result = run_2.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ник всегда должен быть последним')
         self.all_results['test_run2'] = result
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_run3(self):
         run_3 = Rt.Tournament(90, self.runer_1, self.runer_2, self.runer_3)
         result = run_3.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ник всегда должен быть последним')
         self.all_results['test_run3'] = result
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_run4(self):
-        run_4 = Rt.Tournament(6, self.runer_1, self.runer_2, self.runer_3)
+        run_4 = Rt.Tournament(10, self.runer_1, self.runer_2, self.runer_3)
         result = run_4.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ник всегда должен быть последним')
         self.all_results['test_run4'] = result

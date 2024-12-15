@@ -15,19 +15,23 @@ class Runner:
 
 
 class RunnerTest(unittest.TestCase):
+    is_frozen = False
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_walk(self):
         walker = Runner('walker')
         for i in range(0, 10):
             walker.walk()
         self.assertEqual(walker.distance, 50)
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_run(self):
         runner = Runner('Runner1')
         for i in range(0, 10):
             runner.run()
         self.assertEqual(runner.distance, 100)
 
+    @unittest.skipIf(is_frozen, 'Заморозки')
     def test_challenge(self):
         contestant1 = Runner('Cont1')
         contestant2 = Runner('Cont2')
